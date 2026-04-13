@@ -3,6 +3,7 @@ ARG GO="1.25"
 
 ARG ACT_VER="${VER}"
 ARG ACT_SRC="https://github.com/drivera73/act"
+ARG ACT_EXE="/act"
 
 ARG BUILDER_IMAGE="golang"
 ARG BUILDER_VER="${GO}-alpine"
@@ -13,7 +14,7 @@ FROM "${BUILDER_IMG}" AS builder
 ARG GO
 ARG ACT_VER
 ARG ACT_SRC
-ARG ACT_EXE="/act"
+ARG ACT_EXE
 
 RUN apk --no-cache add \
         bash \
@@ -56,4 +57,4 @@ LABEL ORG="ArkCase LLC" \
 
 COPY --from=builder "${ACT_EXE}" "${ACT_EXE}"
 
-ENTRYPOINT [ "/act" ]
+ENTRYPOINT [ "${ACT_EXE}" ]
