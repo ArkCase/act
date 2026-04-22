@@ -1,4 +1,4 @@
-ARG VER="0.2.87-arm"
+ARG VER="0.2.87+arm"
 ARG GO="1.25"
 
 ARG ACT_VER="${VER}"
