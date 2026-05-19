@@ -1,6 +1,11 @@
 name: ecr-build
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      revision:
+        description: "The revision number to use for construction (computed from the Dockerfile if not provided)"
+        required: false
+        type: string
   push:
     branches:
       - main
