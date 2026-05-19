@@ -12,6 +12,7 @@ jobs:
   call-workflow-in-ecr-template:
     uses: arkcase/github-action-templates/.github/workflows/ecr-publish.yml@main
     with:
+      revision: ${{ inputs.revision }}
       compliance-scan: false
       vulnerabilities-scan: false
     secrets:
