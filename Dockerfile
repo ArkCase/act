@@ -38,9 +38,10 @@ RUN mkdir -p "${ACT_PATH}" && \
     git clone "${ACT_SRC}" "${ACT_PATH}" && \
     cd "${ACT_PATH}" && \
     git checkout "v${ACT_VER}" && \
-    # go mod edit -go "${GO}" && \
+    go mod edit -go "${GO}" && \
     # go get -u && \
-    # go mod tidy && \
+    go get -u github.com/docker/cli && \
+    go mod tidy && \
     make lint-go && \
     make build && \
     cp -vf "${ACT_PATH}/dist/local/act" "${ACT_EXE}"
