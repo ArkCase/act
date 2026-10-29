@@ -1,5 +1,5 @@
-ARG VER="0.2.89+arm"
-ARG GO="1.25"
+ARG VER="0.2.92+arm"
+ARG GO="1.26"
 
 ARG ACT_VER="${VER}"
 ARG ACT_SRC="https://github.com/drivera73/act"
