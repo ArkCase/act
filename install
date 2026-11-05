@@ -77,8 +77,9 @@ mkdir -p "${TGT_DIR}" &>/dev/null || true
 
 RC=0
 echo "Creating the container for [${IMAGE}]..."
-CONTAINER="$(docker create "${IMAGE}" 2>&1)" || RC=${?}
-[ ${RC} -eq 0 ] || fail "Failed to create the container (rc=${RC}): ${CONTAINER}"
+# Capture only the ID: when the image has to be pulled, the progress goes to STDERR
+CONTAINER="$(docker create "${IMAGE}")" || RC=${?}
+[ ${RC} -eq 0 ] || fail "Failed to create the container (rc=${RC})"
 trap cleanup EXIT
 ok "Container ready with ID ${CONTAINER}!"
 
@@ -90,4 +91,6 @@ OUT="$( "${CMD[@]}" 2>&1)" || RC=${?}
 [ ${RC} -eq 0 ] || fail "Failed to copy the executable as [${TARGET}] (rc=${RC}): ${OUT}"
 
 ok "Installation complete!"
-exec "${TARGET}" --version
+
+# No exec here, or the EXIT trap wouldn't run and the container would be left behind
+"${TARGET}" --version
